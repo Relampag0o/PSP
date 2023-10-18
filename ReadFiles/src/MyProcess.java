@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class MyProcess {
 
@@ -8,13 +6,20 @@ public class MyProcess {
         if (args.length == 1) {
             try {
                 int counter = 0;
+                File f = new File(args[0]);
                 BufferedReader bfr = new BufferedReader(new FileReader(args[0]));
+                BufferedWriter bfw = new BufferedWriter(new FileWriter("C:\\Users\\Jose\\Downloads\\" + "sumado"+ f.getName()));
+                // si el fichero es informatica que espere
                 String line = "";
+                Thread.sleep(1000);
                 while ((line = bfr.readLine()) != null) {
                     counter += Integer.parseInt(line);
+
                 }
-                System.out.println(counter);
+                //System.out.println(counter);
+                bfw.write(counter+"");
                 bfr.close();
+                bfw.close();
 
             } catch (Exception e) {
                 e.printStackTrace();
