@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 public class Launcher {
     public static void main(String[] args) {
         int counter = 0;
+        long startTime = System.nanoTime();
+
         for (String arg : args) {
             ProcessBuilder pb = new ProcessBuilder("java", "MyProcess", arg);
             try {
@@ -24,6 +26,8 @@ public class Launcher {
 
 
         }
+        long endTime = System.nanoTime();
         System.out.println("Total amount: " + counter);
+        System.out.println("Total time: " + (endTime - startTime) / 1e6 + " ms");
     }
 }
