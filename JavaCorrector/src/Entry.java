@@ -2,11 +2,13 @@ public class Entry {
 
     private int num1;
     private int num2;
+    private int result;
 
 
     public Entry(int num1, int num2) {
         this.num1 = num1;
         this.num2 = num2;
+        this.result = num1 + num2;
     }
 
     public int getNum1() {
@@ -24,4 +26,9 @@ public class Entry {
     public void setNum2(int num2) {
         this.num2 = num2;
     }
+
+    public int getResult() {
+        return result;
+    }
+
 }

@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -15,10 +19,10 @@ public class Launcher {
 
 
     public void generateEntries() {
-        Random r = new Random();
-        for (int i = 0; i < 10; i++) {
+        Random r = new Random(2);
+        for (int i = 0; i < 5; i++) {
             entries.add(new Entry(r.nextInt(1, 100), r.nextInt(1, 100)));
-            outputs.add(entries.get(i).getNum1() + entries.get(i).getNum2());
+            outputs.add(entries.get(i).getResult());
         }
     }
 
@@ -31,10 +35,23 @@ public class Launcher {
 
     }
 
-    public void launch() {
+    public void launch() throws IOException {
 
-        for (Entry e: entries){
-                ProcessBuilder pb = new ProcessBuilder("java","Addition", (String) e.getNum1(),e.getNum2());
+        for (int i = 0; i < entries.size(); i++) {
+            ProcessBuilder pb = new ProcessBuilder("java", "AdditionExe", entries.get(i).getNum1() + "", entries.get(i).getNum2() + "");
+            Process p = pb.start();
+            BufferedReader bfr = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String line;
+            while ((line = bfr.readLine()) != null) {
+                int result = Integer.parseInt(line);
+                if (outputs.get(i) == result) {
+                    System.out.println("Test passed." + " Result expected: " +
+                            outputs.get(i) + " Provided: " + result);
+
+                } else
+                    System.out.println("Test not passed." + " Result expected: " +
+                            outputs.get(i) + " Provided: " + result);
+            }
 
 
         }
@@ -42,9 +59,10 @@ public class Launcher {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Launcher l = new Launcher();
         l.show();
+        l.launch();
 
 
     }
