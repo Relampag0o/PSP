@@ -8,8 +8,8 @@ public class MyProcess {
                 int counter = 0;
                 File f = new File(args[0]);
                 BufferedReader bfr = new BufferedReader(new FileReader(args[0]));
-                BufferedWriter bfw = new BufferedWriter(new FileWriter("C:\\Users\\Jose\\Downloads\\" + "sumado"+ f.getName()));
-                // si el fichero es informatica que espere
+                BufferedWriter bfw = new BufferedWriter(new FileWriter("C:\\Users\\Jose\\Downloads\\" + "sumado" + f.getName()));
+
                 String line = "";
                 Thread.sleep(1000);
                 while ((line = bfr.readLine()) != null) {
@@ -17,7 +17,7 @@ public class MyProcess {
 
                 }
                 //System.out.println(counter);
-                bfw.write(counter+"");
+                bfw.write(counter + "");
                 bfr.close();
                 bfw.close();
 
