@@ -7,7 +7,6 @@ public class Main {
 
         String[] dirs = {"/home/jose/Escritorio/testdelete", "/home/jose/Escritorio/testdelete2", "/home/jose/Escritorio/testdelete3"};
 
-
         for (int i = 0; i < dirs.length; i++) {
             ProcessBuilder pb = new ProcessBuilder("java", "Finder", dirs[i], "oddnumbers.txt");
             Process p = pb.start();
