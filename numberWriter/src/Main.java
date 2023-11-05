@@ -22,7 +22,8 @@ public class Main {
         try {
             for (int i = 0; i < 5; i++) {
                 ProcessBuilder pb = new ProcessBuilder("java", "Writer", i + "");
-                pb.start();
+                Process p = pb.start();
+
             }
 
 
