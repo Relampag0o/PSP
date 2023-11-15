@@ -49,9 +49,6 @@ public class Launcher {
     }
 
     public void launch() throws IOException {
-        // TODO: ASK IF THERE IS ANY WAY TO EXECUTE FEW PROCESSES AT ONCE
-        // ONE FOR EACH FILE SO THE READING GOES FASTER.
-
         for (File f : files) {
             System.out.println("Executing " + f.getName());
             for (int i = 0; i < entries.size(); i++) {
