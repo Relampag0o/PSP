@@ -39,7 +39,7 @@ public class Customer implements Runnable {
         while (true) {
             bs.customerArrives(name);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

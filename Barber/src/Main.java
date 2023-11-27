@@ -8,7 +8,7 @@ public class Main {
         Customer c1 = new Customer("c1", bs);
         Customer c2 = new Customer("c2", bs);
         Customer c3 = new Customer("c3", bs);
-        Customer c4 = new Customer("c3", bs);
+        Customer c4 = new Customer("c4", bs);
         Thread customer1 = new Thread(c1);
         Thread customer2 = new Thread(c2);
         Thread customer3 = new Thread(c3);

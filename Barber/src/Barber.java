@@ -39,11 +39,14 @@ public class Barber implements Runnable{
     public void run(){
         while (true) {
             bs.barberWorks(name);
+            /*
             try {
-                Thread.sleep(1000);
+                //Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+             */
         }
     }
 }

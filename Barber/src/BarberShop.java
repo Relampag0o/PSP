@@ -1,44 +1,43 @@
 public class BarberShop {
-    private boolean barberSleeping = true;
-    private int availableChairs = 5;
+    private boolean barberSleeping;
+    private int availableChairs;
+
+    private int maxChairs = 10;
 
     public BarberShop() {
+        this.barberSleeping = true;
+        this.availableChairs = maxChairs;
 
     }
 
 
     public synchronized void barberWorks(String name) {
-        while (availableChairs == 5) {
+        while (availableChairs == maxChairs) {
             try {
+                System.out.println("Barber " + name + " sleeping. No customers available.");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         barberSleeping = false;
-        notify();
+        availableChairs++;
+
 
 
     }
 
     public synchronized void customerArrives(String name) {
-
-        while (barberSleeping) {
-            try {
-                if (availableChairs > 0) {
-                    availableChairs--;
-                    wait();
-                } else
-                    break;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if (availableChairs > 0) {
+            if (availableChairs == maxChairs) {
+                System.out.println("Waking up barber..");
+                notify();
             }
-        }
-        notify();
+            availableChairs--;
+        } else
+            System.out.println("Customer " + name + "leaving!");
 
-        System.out.println("Customer " + name + " is getting attended");
-        barberSleeping = false;
-        availableChairs++;
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
