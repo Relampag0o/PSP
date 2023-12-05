@@ -1,3 +1,5 @@
+import java.sql.PreparedStatement;
+
 public class Canoe {
     private int capacity;
     private boolean missionaryIn;
@@ -9,22 +11,18 @@ public class Canoe {
     }
 
     public synchronized void cannibalArrives(String name) {
-
-        if (capacity > 0 && missionaryIn) {
-            capacity--;
-            System.out.println("Cannibal " + name + " getting in.");
-        } else {
+        while (capacity == 0 || !missionaryIn) {
+            System.out.println("Cannibal " + name + " getting blocked.");
             try {
-                System.out.println("Cannibal " + name + " getting blocked.");
                 wait();
-            } catch (Exception e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
-
             }
         }
-
-
+        capacity--;
+        System.out.println("Cannibal " + name + " getting in.");
     }
+
 
     public int getCapacity() {
         return capacity;
@@ -43,23 +41,24 @@ public class Canoe {
     }
 
     public synchronized void missionaryArrives(String name) {
-        if (!missionaryIn && capacity > 0) {
-            missionaryIn = true;
-            capacity--;
-            System.out.println("Missionary " + name + " getting in the canoe.");
-        } else {
+        while (capacity == 0 || missionaryIn) {
+            System.out.println("Missionary " + name + " getting blocked.");
             try {
-                System.out.println("Missionary " + name + " getting blocked.");
                 wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-
+        missionaryIn = true;
+        capacity--;
+        System.out.println("Missionary " + name + " getting in the canoe.");
     }
-
-
 }
+
+
+
+
+
+
 
 
