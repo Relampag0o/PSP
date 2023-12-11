@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-
 public class BranchOffice {
     private String name;
     private int money;
