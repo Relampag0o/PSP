@@ -23,10 +23,11 @@ public class BranchOffice {
         int cashier = r.nextInt(cashiers.length);
         System.out.println("Customer wants to deposit " + money + "€ in the cashier " + cashier);
         try {
-            System.out.println("Depositing " + money + "€ in the cashier " + cashier);
             cashiers[cashier].acquire();
+            System.out.println("acquiring cashier " + cashier + "to deposit " + money + "€");
             Thread.sleep(2000);
             System.out.println("The deposit was successful. The branch office has " + (money + this.money) + "€");
+            System.out.println("releasing cashier " + cashier);
             cashiers[cashier].release();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -43,10 +44,11 @@ public class BranchOffice {
             return;
         }
         try {
-            System.out.println("Withdrawing " + money + "€ in the cashier " + cashier);
             cashiers[cashier].acquire();
+            System.out.println("acquiring cashier " + cashier + "to withdraw " + money + "€");
             Thread.sleep(2000);
             System.out.println("The withdraw was successful. The branch office has " + (this.money - money) + "€");
+            System.out.println("releasing cashier " + cashier);
             cashiers[cashier].release();
         } catch (InterruptedException e) {
             e.printStackTrace();
