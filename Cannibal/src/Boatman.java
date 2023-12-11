@@ -1,30 +1,21 @@
-public class Boatman implements Runnable {
-    String name;
-    Canoe c;
+public class Boatman extends Thread {
+    private String name;
+    private Canoe canoe;
 
-
-    public Boatman(String name, Canoe c) {
+    public Boatman(String name, Canoe canoe) {
         this.name = name;
-        this.c = c;
+        this.canoe = canoe;
     }
 
-    @Override
     public void run() {
         while (true) {
-            // withouth the sync doesnt work idk why.
-            synchronized (c) {
-                if (c.getCapacity() == 0) {
-                    System.out.println("Disembarking..");
-                    try {
-                        Thread.sleep(3000);
-                        c.setCapacity(4);
-                        c.setMissionaryIn(false);
-                        c.notifyAll();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+            try {
+                Thread.sleep(10000);
+                canoe.disembark();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
+
 }

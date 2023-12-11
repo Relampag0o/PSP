@@ -1,23 +1,24 @@
-public class Cannibal implements Runnable {
+public class Cannibal extends Thread {
+
     private String name;
-    private Canoe c;
+    private Canoe canoe;
 
 
-    public Cannibal(String name, Canoe c) {
+    public Cannibal(String name, Canoe canoe) {
         this.name = name;
-        this.c = c;
+        this.canoe = canoe;
     }
 
-    @Override
     public void run() {
         while (true) {
-            c.cannibalArrives(this.name);
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
+                canoe.cannibalArrives();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
         }
     }
+
 }

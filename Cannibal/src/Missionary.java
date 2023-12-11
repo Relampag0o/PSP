@@ -1,24 +1,24 @@
-public class Missionary implements Runnable {
-
+public class Missionary extends Thread {
     private String name;
-    private Canoe c;
+    private Canoe canoe;
 
 
-    public Missionary(String name, Canoe c) {
+    public Missionary(String name, Canoe canoe) {
         this.name = name;
-        this.c = c;
+        this.canoe = canoe;
     }
 
-    @Override
     public void run() {
         while (true) {
-            c.missionaryArrives(this.name);
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
+                canoe.missionaryArrives();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
 
+        }
     }
+
+
 }
