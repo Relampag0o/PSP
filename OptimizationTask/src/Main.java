@@ -4,19 +4,30 @@ import java.util.LinkedList;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
+        String[] files = {"rrhh (2).txt", "rrhh (1).txt", "gerencia (2).txt", "contabilidad (2).txt", "comercio (2).txt", "informatica (2).txt"};
 
-        int counter = 0;
         LinkedList<Reader> readers = new LinkedList<Reader>();
         LinkedList<Thread> threads = new LinkedList<Thread>();
+        int threadNumbers = 3;
+        int operation = files.length / threadNumbers;
+        int counter = 0;
+        int stacker = 0;
 
-        for (String file : args) {
-            Reader reader = new Reader(file);
+        for (int i = 0; i < threadNumbers; i++) {
+            String[] filesToRead = new String[operation];
+            for (int j = i * operation; j < (i + 1) * operation; j++) {
+                filesToRead[counter] = files[j];
+                counter++;
+            }
+            Reader reader = new Reader(filesToRead);
             Thread thread = new Thread(reader);
-            thread.start();
             readers.add(reader);
+            thread.start();
             threads.add(thread);
-        }
+            counter = 0;
 
+
+        }
         for (Thread thread : threads) {
             try {
                 thread.join();
@@ -24,14 +35,11 @@ public class Main {
                 e.printStackTrace();
             }
         }
-
         for (Reader reader : readers) {
-            counter += reader.getCounter();
+            stacker += reader.getCounter();
         }
 
-        System.out.println("Counter: " + counter);
-
-
+        System.out.println(stacker);
     }
 
 }
