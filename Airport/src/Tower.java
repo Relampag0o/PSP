@@ -18,8 +18,8 @@ public class Tower {
     }
 
     public synchronized Terminal assignTerminal() {
-        int smallest = terminals[0].getUsages();
-        Terminal t = terminals[0];
+        int smallest = 100;
+        Terminal t = null;
 
         for (Terminal terminal : terminals) {
             System.out.println(terminal.getName() + " usages: " + terminal.getUsages());

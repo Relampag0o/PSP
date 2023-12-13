@@ -33,7 +33,7 @@ public class Plane implements Runnable {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(6000);
+                Thread.sleep(4000);
                 Terminal terminal = tower.assignTerminal();
                 terminal.getTracks().acquire();
                 if (id % 2 == 0)

@@ -12,14 +12,13 @@ public class Technician implements Runnable {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(3000);
-                terminal.getTracks().acquire();
-                System.out.println("I am the technician " + name + " and I am going to fix the plane");
                 terminal.setUnderMaintainance(true);
-                Thread.sleep(3000);
+                terminal.getTracks().acquire();
+                System.out.println("I am the technician " + name + " and I am going to fix the terminal " + terminal.getName());
+                Thread.sleep(5000);
                 terminal.getTracks().release();
                 terminal.setUnderMaintainance(false);
-                System.out.println("I am the technician " + name + " and I have fixed the plane");
+                System.out.println("I am the technician " + name + " and I have fixed the terminal " + terminal.getName());
             } catch (Exception e) {
                 e.printStackTrace();
             }
