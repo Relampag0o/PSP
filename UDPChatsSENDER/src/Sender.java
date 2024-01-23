@@ -15,7 +15,7 @@ public class Sender implements Runnable {
                 System.out.println("Insert your message:");
                 String message = sc.nextLine();
                 InetAddress IPAddress = InetAddress.getByName("127.0.0.1");
-                int port = 12345;
+                int port = 1999;
                 DatagramPacket sendPacket = new DatagramPacket(message.getBytes(), message.length(), IPAddress, port);
                 socket.send(sendPacket);
                 socket.close();
