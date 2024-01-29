@@ -21,6 +21,8 @@ public class Sender implements Runnable {
                 writer.close();
                 socket.close();
 
+
+
             }
         } catch (Exception e) {
             e.printStackTrace();
