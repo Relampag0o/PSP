@@ -27,7 +27,8 @@ public class Server implements Runnable {
     }
 
     public String printSeats() {
-        String seats = "";;
+        String seats = "";
+        ;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (this.seats[i][j].isBooked()) {
@@ -36,9 +37,19 @@ public class Server implements Runnable {
                     seats += "[ ]";
 
             }
+            seats += ";";
             System.out.println();
         }
         return seats;
+    }
+
+    public boolean bookSeat(int row, int column) {
+        if (this.seats[row][column].isBooked()) {
+            return false;
+        } else {
+            this.seats[row][column].setBooked(true);
+            return true;
+        }
     }
 
     @Override
@@ -51,11 +62,27 @@ public class Server implements Runnable {
                 Socket clientSocket = serverSocket.accept();
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                out.println("Welcome to the cinema! Here are the available seats: ");
                 out.println(printSeats());
+
+
+                // anwser from the client with the seat to book
+                String seatsReservation = in.readLine();
+
+                int row = Integer.parseInt(seatsReservation.split(";")[0]);
+                int column = Integer.parseInt(seatsReservation.split(";")[1]);
+                System.out.println("Confirmation received. Booking seats..." + seatsReservation);
+
+                if (bookSeat(row, column)) {
+                    out.println("Seat booked successfully!");
+                } else {
+                    out.println("Seat is already booked!");
+                }
+
+
                 in.close();
                 out.close();
                 clientSocket.close();
-                Thread.sleep(2000);
                 System.out.println("Waiting to stablish a new connection..");
 
 
