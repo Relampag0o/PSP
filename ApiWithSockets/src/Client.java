@@ -10,6 +10,8 @@ public class Client {
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             System.out.println(reader.readLine());
+            out.println("GET /getProducts");
+            System.out.println(reader.readLine());
         } catch (Exception e) {
             e.printStackTrace();
         }
