@@ -8,6 +8,8 @@ import java.util.Scanner;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class UDP {
+     private DatagramSocket socket;
+        private DatagramPacket receivePacket;
 
     // CLIENT
     public void client() {
@@ -35,7 +37,7 @@ public class UDP {
         }
     }
 
-    public void server() {
+    public void serverLauncher() {
         // LANZADOR:
         DatagramSocket socket = null;
         // INSTANCIAR LA CLASE SERVERTHREAD:
@@ -64,6 +66,49 @@ public class UDP {
                 socket.close();
             }
         }
+    }
+
+    public void manejarServer() {
+
+        // private DatagramSocket socket;
+        //    private DatagramPacket receivePacket;
+
+
+        try {
+
+            byte[] data = receivePacket.getData();
+            System.out.println("Conection started");
+            InetAddress IPAddress = receivePacket.getAddress();
+            int port = receivePacket.getPort();
+            System.out.println("Waiting for client to send a number");
+            String number = new String(data, 0, receivePacket.getLength());
+            System.out.println("Received: " + number);
+            int clientNumber = Integer.parseInt(number);
+            /*
+            if (clientNumber == this.number) {
+                System.out.println("Client guessed the number");
+                String message = "Congratulations! You guessed the number!";
+                byte[] sendData = message.getBytes();
+                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                socket.send(sendPacket);
+                System.out.println("Message sent to client");
+            } else {
+                System.out.println("Client did not guess the number");
+                String message = "Sorry, the number is not correct. Try again!";
+                byte[] sendData = message.getBytes();
+                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                socket.send(sendPacket);
+                System.out.println("Message sent to client");
+            }
+
+             */
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
     }
 
 
